@@ -69,4 +69,4 @@ In Silico Mutagenesis and Relaxation:
 Use PyRosetta to apply mutagenesis and relax the displaced structures.
 Output: Mutated, relaxed PDB files with desired dynamic properties.
 
-Validate the protein dynamics using molecular dynamics, and if possible confirm the folds using AlphaFold
+Validate the protein dynamics using molecular dynamics, and if possible confirm the structures using AlphaFold
