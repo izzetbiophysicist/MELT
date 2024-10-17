@@ -68,10 +68,13 @@ The mutated designs aim to either lock the protein into the displaced conformati
 ## Normal Mode Analysis:
 
 Displace protein structures along low-frequency normal modes using Step1_NormalModes.R.
+
 Output: Displaced PDB files.
+
 In Silico Mutagenesis and Relaxation:
 
 Use PyRosetta to apply mutagenesis and relax the displaced structures.
+
 Output: Mutated, relaxed PDB files with desired dynamic properties.
 
 Validate the protein dynamics using molecular dynamics, and if possible confirm the structures using AlphaFold
