@@ -58,3 +58,15 @@ Relaxed and mutated PDB files:
 desloc_7_relaxed.pdb
 desloc_7_relaxed_designed.pdb
 The mutated designs aim to either lock the protein into the displaced conformation or enhance the dynamics observed along the chosen normal mode.
+
+## Workflow Summary
+## Normal Mode Analysis:
+
+Displace protein structures along low-frequency normal modes using Step1_NormalModes.R.
+Output: Displaced PDB files.
+In Silico Mutagenesis and Relaxation:
+
+Use PyRosetta to apply mutagenesis and relax the displaced structures.
+Output: Mutated, relaxed PDB files with desired dynamic properties.
+
+Validate the protein dynamics using molecular dynamics, and if possible confirm the folds using AlphaFold
