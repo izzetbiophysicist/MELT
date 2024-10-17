@@ -32,6 +32,7 @@ scale: Scale of displacement (default is 10).
 
 ## Outputs:
 Displaced PDB files: desloc_<mode>_<direction>.pdb
+
 The displacement will generate altered conformations of the protein based on the selected normal mode, such as:
 
 desloc_7_minus.pdb
@@ -47,6 +48,7 @@ python Step2_DesignPyrosetta.py
 ```
 
 Relaxation: After displacement, the structure is relaxed using the FastRelax protocol to minimize energy.
+
 Mutagenesis: Selected regions of the protein are mutated to introduce the desired dynamics while maintaining structural integrity.
 
 ## Parameters:
@@ -55,8 +57,11 @@ scorefxn: PyRosetta score function for energy calculations (e.g., ref2015_cart.w
 chain: Chain of the protein to design (e.g., "A").
 Outputs:
 Relaxed and mutated PDB files:
+
 desloc_7_relaxed.pdb
+
 desloc_7_relaxed_designed.pdb
+
 The mutated designs aim to either lock the protein into the displaced conformation or enhance the dynamics observed along the chosen normal mode.
 
 ## Workflow Summary
