@@ -11,20 +11,20 @@ pdb <- trim.pdb(pdb, atom.select(pdb, type = 'HETATM', elesy = "H",
 # Perform normal mode analysis (NMA) on the trimmed structure
 nma <- aanma(pdb, outmodes = 'noh', rm.wat = TRUE)
 
-# Function to apply displacement in a specified manner (Factor or Geometrical)
+# Function to apply displacement in a specified manner (magnification factor or RMS)
 # Args:
 #   pdb: The original PDB object
 #   nma: The NMA results containing the mode vectors
 #   mode: The mode number to use for displacement
 #   direction: The direction of displacement, either "plus" or "minus"
-#   scale: The scaling factor for the Factor method (default is 10)
-#   rms: The RMS value for the Geometrical method
-#   selection: Atom selection for the Geometrical method ('calpha' or 'all')
-#   method: The method to use for displacement ('Factor' or 'Geometrical')
+#   scale: The magnification factor for the Factor method (default is 10)
+#   rms: The RMS value for the RMS method (in Angstroms)
+#   selection: Atom selection for the RMS method ('calpha' or 'all')
+#   method: The method to use for displacement ('Factor' or 'RMS')
 apply_displacement <- function(pdb, nma, mode, direction, scale = 10, rms = 1.0, 
                                selection = 'calpha', method = 'Factor') {
   if (method == 'Factor') {
-    # Displacement using the Factor method
+    # Displacement using the magnification factor method
     pdb_modified <- pdb
 
     # Apply displacement based on the specified direction
@@ -41,8 +41,8 @@ apply_displacement <- function(pdb, nma, mode, direction, scale = 10, rms = 1.0,
 
     # Write the modified PDB structure to a file
     write.pdb(pdb_modified, file = output_file)
-  } else if (method == 'Geometrical') {
-    # Displacement using the Geometrical method
+  } else if (method == 'RMS') {
+    # Displacement using the RMS method
     xyz <- pdb$xyz
 
     # Select atom indices based on input
@@ -63,12 +63,12 @@ apply_displacement <- function(pdb, nma, mode, direction, scale = 10, rms = 1.0,
     displaced_xyz[inds] <- xyz[inds] + vec[inds] * mag
 
     # Generate output file name
-    output_file <- paste("desloc_", mode, "_", direction, "_geometrical.pdb", sep = "")
+    output_file <- paste("desloc_", mode, "_", direction, "_rms.pdb", sep = "")
 
     # Write to PDB
     write.pdb(pdb = pdb, xyz = displaced_xyz, file = output_file)
   } else {
-    stop("Invalid method. Please specify 'Factor' or 'Geometrical'.")
+    stop("Invalid method. Please specify 'Factor' or 'RMS'.")
   }
 }
 
@@ -76,6 +76,6 @@ apply_displacement <- function(pdb, nma, mode, direction, scale = 10, rms = 1.0,
 apply_displacement(pdb, nma, mode = 7, direction = "minus", 
                    scale = 10, method = 'Factor')
 
-# Example usage: Displacing using mode 7 in the plus direction with Geometrical method
+# Example usage: Displacing using mode 7 in the plus direction with RMS method
 apply_displacement(pdb, nma, mode = 7, direction = "plus", 
-                   rms = 1.0, selection = 'calpha', method = 'Geometrical')
+                   rms = 1.0, selection = 'calpha', method = 'RMS')
